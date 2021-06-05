@@ -1,0 +1,154 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css" rel="stylesheet"/>  
+        <title>Forms</title>    
+
+<style>
+.card-default {
+    color: #333;
+    background: linear-gradient(#fff,#ebebeb) repeat scroll 0 0 transparent;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+</style>
+
+
+</head>
+<body>
+<div class="container">
+
+    <div class="col-md-2 col-lg-3">
+        <div class="form-group">
+            <label class="control-label">Data de Aniversário</label>
+            <div class="input-group date" id="date">
+                <input class="form-control" type="text" />
+                <span class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2 col-lg-3">
+        <div class="form-group">
+            <label class="control-label" for="time">Hora</label>
+            <div class="input-group">
+                <input type="text" class="form-control time" id="time"/>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="col-md-2 col-lg-3">
+        <div class="form-group">
+            <label class="control-label" for="time">CEP</label>
+            <div class="input-group">
+                <input type="text" class="form-control cep" id="cep"/>
+            </div>
+        </div>
+    </div>
+ 
+    <div class="col-md-2 col-lg-3">
+        <div class="form-group">
+            <label class="control-label" for="time">Telefone</label>
+            <div class="input-group">
+                <input type="text" class="form-control phoneBR" id="phoneBR"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2 col-lg-3">
+        <div class="form-group">
+            <label class="control-label" for="time">CPF</label>
+            <div class="input-group">
+                <input type="text" class="form-control cpf" id="cpf"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2 col-lg-3">
+        <div class="form-group">
+            <label class="control-label" for="time">CNPJ</label>
+            <div class="input-group">
+                <input type="text" class="form-control cnpj" id="cnpj"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2 col-lg-3">
+        <div class="form-group">
+            <label class="control-label" for="time">Valor R$</label>
+            <div class="input-group">
+                <input type="text" class="form-control money" id="money"/>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+</div>         
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+<script src="{% static 'jquery.mask.js' %}"></script>
+
+<script>  
+$(document).ready(function(){
+
+    //DatePicker
+    $( "#date" ).datepicker({
+    format: "dd/mm/yyyy",
+    todayHighlight: true,
+    language: "pt-BR"
+    }); 
+
+
+    //$('.date').mask('11/11/1111'); //Não está funcionando junto com o DataPicker
+    $('.time').mask('00:00:00');
+    //$('.date_time').mask('00/00/0000 00:00:00');
+    $('.cep').mask('00.000-000');
+    $('.phone').mask('0000-0000');
+    $('.phone_with_ddd').mask('(00) 0000-0000');
+    //$('.phone_us').mask('(000) 000-0000');
+    $('.cpf').mask('000.000.000-00', {reverse: true});
+    $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
+    $('.money').mask('000.000.000.000.000,00', {reverse: true});
+    //$('.mixed').mask('AAA 000-S0S');
+
+
+    //Para mascara de telefone com 8 ou 9 digios
+    var MaskTelBrasil = function (val) {
+    return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+    },
+    spOptions = {
+        onKeyPress: function(val, e, field, options) {
+            field.mask(MaskTelBrasil.apply({}, arguments), options);
+        }
+    };
+
+    $('.phoneBR').mask(MaskTelBrasil, spOptions);
+
+
+});
+</script>
+
+
+
+
+
+</body>
+</html>
